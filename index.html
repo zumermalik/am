@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdullah Malik</title>
-    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap" rel="stylesheet">
     <style>
-        /* Base Reset */
+        /* Modern Reset */
         * {
             margin: 0;
             padding: 0;
@@ -20,18 +19,22 @@
             background-color: #0e0e0e; 
             color: #a1a1a1; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 650px;
-            margin: 60px auto;
-            padding: 20px;
+            line-height: 1.7; /* Increased for better readability */
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container with proper Farza margins */
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 120px 24px; /* Huge top padding for the aesthetic */
         }
 
         /* --- THE STATUS BAR (Clock & Calendar) --- */
         .status-container {
             position: fixed;
-            top: 20px;
-            right: 25px;
+            top: 40px;
+            right: 40px;
             text-align: right;
             font-family: 'Courier New', Courier, monospace;
             z-index: 100;
@@ -41,26 +44,24 @@
             font-size: 16px;
             color: #ffffff;
             letter-spacing: 1px;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
         #timezone-label {
             font-size: 10px;
             color: #444;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: block;
         }
 
-        /* Calendar Grid Style */
         .mini-calendar {
             font-size: 11px;
             color: #555;
-            line-height: 1.2;
         }
 
         .calendar-header {
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: #888;
             text-transform: lowercase;
         }
@@ -72,198 +73,189 @@
             justify-content: end;
         }
 
-        .day-label {
-            color: #444;
-            font-weight: bold;
-        }
-
-        .today {
-            color: #3b82f6; /* Farza Blue highlight */
-            font-weight: bold;
-        }
+        .day-label { color: #444; font-weight: bold; }
+        .today { color: #3b82f6; font-weight: bold; }
 
         /* Navigation */
         nav {
-            margin-bottom: 50px;
+            margin-bottom: 80px; /* Space between nav and content */
         }
 
         nav a {
             color: #3b82f6; 
             text-decoration: none;
-            margin-right: 20px;
+            margin-right: 24px;
             font-size: 18px;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+        nav a:hover { opacity: 0.7; }
 
         /* Headlines - INTER */
         h1 {
             font-family: 'Inter', sans-serif;
-            font-size: 52px;
+            font-size: 56px;
             color: #ffffff;
-            margin-bottom: 35px;
+            margin-bottom: 48px; /* Large gap after headline */
             font-weight: 800;
-            letter-spacing: -2.5px;
+            letter-spacing: -3px;
+            line-height: 1.1;
         }
 
         h2 {
             font-family: 'Inter', sans-serif;
             color: #ffffff; 
-            font-size: 28px; 
-            margin-bottom: 25px;
+            font-size: 32px; 
+            margin: 60px 0 32px 0; /* Huge vertical margins for section breaks */
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
         }
 
         p {
-            margin-bottom: 28px;
+            margin-bottom: 32px; /* Consistent paragraph spacing */
             font-size: 20px;
             font-weight: 400;
         }
 
-        /* Link Styling */
+        /* Clean Link Styling */
         a.inline-link, a.inline-link:visited, a.inline-link:active {
             color: #3b82f6 !important;
             text-decoration: none !important;
-            transition: opacity 0.2s;
         }
 
         a.inline-link:hover {
             text-decoration: underline !important;
         }
 
-        .highlight {
-            color: #e5e5e5;
-        }
+        .highlight { color: #e5e5e5; }
 
-        /* SPA Logic Styling */
+        /* Page Handling */
         .page { display: none; }
-        .active { 
-            display: block; 
-            animation: fadeIn 0.3s ease-in;
-        }
+        .active { display: block; animation: fadeIn 0.4s ease; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* Social Icons */
         .social-row {
-            margin-top: 60px;
+            margin-top: 80px; /* Distance from last paragraph */
+            padding-top: 40px;
+            border-top: 1px solid #1a1a1a; /* Subtle divider */
             display: flex;
-            gap: 24px;
+            gap: 28px;
             align-items: center;
         }
 
         .social-icon svg {
             width: 22px;
             height: 22px;
-            fill: #a1a1a1;
+            fill: #555;
             transition: fill 0.2s ease;
         }
 
         .social-icon:hover svg { fill: #ffffff; }
 
-        /* Responsive Layout */
-        @media (max-width: 850px) {
+        /* Responsive */
+        @media (max-width: 900px) {
             .status-container {
                 position: static;
                 text-align: left;
-                margin-bottom: 40px;
+                margin-bottom: 60px;
             }
             .calendar-days { justify-content: start; }
+            .container { padding: 60px 24px; }
+            h1 { font-size: 42px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="status-container">
-        <div id="clock">00:00:00</div>
-        <span id="timezone-label">detecting...</span>
-        <div class="mini-calendar">
-            <div id="month-year" class="calendar-header"></div>
-            <div class="calendar-days" id="calendar-days">
-                <!-- Injected via JS -->
+    <div class="container">
+        <!-- FIXED STATUS -->
+        <div class="status-container">
+            <div id="clock">00:00:00</div>
+            <span id="timezone-label">detecting...</span>
+            <div class="mini-calendar">
+                <div id="month-year" class="calendar-header"></div>
+                <div class="calendar-days" id="calendar-days"></div>
             </div>
+        </div>
+
+        <nav>
+            <a onclick="showPage('home')">home</a>
+            <a onclick="showPage('content')">content i like</a>
+            <a onclick="showPage('rules')">life rules</a>
+        </nav>
+
+        <!-- PAGE: HOME -->
+        <div id="home" class="page active">
+            <h1>hi i'm abdullah.</h1>
+            <p>
+                i'm a 17-year-old student of artificial intelligence and a chess player. 
+                i love combining <span class="highlight">strategic planning</span> with building things for the web.
+            </p>
+            <p>
+                i actually come from a pre-medical background where i studied bio, physics, and chemistry. 
+                recently, i transitioned into AI—i'm deeply inspired by <span class="highlight">neural nets</span> and the 
+                pure <span class="highlight">math</span> behind them.
+            </p>
+            <p>
+                these days i'm mostly <span class="highlight">vibe coding</span> and shipping random stuff. my toolkit 
+                includes python, c, php, and the standard web stack (html/css/js).
+            </p>
+            <p>
+                currently, i am shipping <a href="https://apex-aerosenital.vercel.app/" class="inline-link" target="_blank">apex</a> — 
+                a project focused on <span class="highlight">flight anomaly detection</span> within the aero-ai simulation niche.
+            </p>
+        </div>
+
+        <!-- PAGE: CONTENT -->
+        <div id="content" class="page">
+            <h2>content i like</h2>
+            <p>
+                when i'm not coding, i'm usually watching <a href="https://www.netflix.com/title/70177064" class="inline-link" target="_blank">game of thrones</a> 
+                or stranger things. for music, i'm currently into <span class="highlight">funk and beats</span>.
+            </p>
+            <p>
+                chess is a massive part of my life. i spend a lot of time analyzing <span class="highlight">magnus carlsen's strategies</span>. 
+                the goal is to eventually become a grandmaster.
+            </p>
+            <p>
+                feel free to <a href="https://link.chess.com/play/in9mTR" class="inline-link" target="_blank">hmu for a match lol</a>.
+            </p>
+        </div>
+
+        <!-- PAGE: RULES -->
+        <div id="rules" class="page">
+            <h2>life rules</h2>
+            <p>
+                i try to live by the <a href="https://open.spotify.com/show/4KNicF2b64rXaDjqs1QaiK" class="inline-link" target="_blank">wabi-sabi</a> 
+                rules of living—finding peace in imperfection and the natural cycle of things.
+            </p>
+            <p>
+                i'm also focused on systems for <a href="https://paulgraham.com/wealth.html" class="inline-link" target="_blank">wealth creation</a>, 
+                applying strategic planning to build things that last.
+            </p>
+        </div>
+
+        <!-- SOCIALS -->
+        <div class="social-row">
+            <a href="https://x.com/AbdullahMa79411" class="social-icon" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/abdullah-malik-4315b5354" class="social-icon" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://github.com/AbdullahMalik7" class="social-icon" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
         </div>
     </div>
 
-    <nav>
-        <a onclick="showPage('home')">home</a>
-        <a onclick="showPage('content')">content i like</a>
-        <a onclick="showPage('rules')">life rules</a>
-    </nav>
-
-    <!-- PAGE: HOME -->
-    <div id="home" class="page active">
-        <h1>hi i'm abdullah.</h1>
-        <p>
-            i'm a 17-year-old student of artificial intelligence and a chess player. 
-            i love combining <span class="highlight">strategic planning</span> with building things for the web.
-        </p>
-        <p>
-            i actually come from a pre-medical background where i studied bio, physics, and chemistry. 
-            recently, i transitioned into AI—i'm deeply inspired by <span class="highlight">neural nets</span> and the 
-            pure <span class="highlight">math</span> behind them.
-        </p>
-        <p>
-            these days i'm mostly <span class="highlight">vibe coding</span> and shipping random stuff. my toolkit 
-            includes python, c, php, and the standard web stack (html/css/js).
-        </p>
-        <p>
-            currently, i am shipping <a href="https://apex-aerosenital.vercel.app/" class="inline-link" target="_blank">apex</a> — 
-            a project focused on <span class="highlight">flight anomaly detection</span> within the aero-ai simulation niche.
-        </p>
-    </div>
-
-    <!-- PAGE: CONTENT -->
-    <div id="content" class="page">
-        <h2>content i like</h2>
-        <p>
-            when i'm not coding, i'm usually watching <a href="https://www.netflix.com/title/70177064" class="inline-link" target="_blank">game of thrones</a> 
-            or stranger things. for music, i'm currently into <span class="highlight">funk and beats</span>.
-        </p>
-        <p>
-            chess is a massive part of my life. i spend a lot of time analyzing <span class="highlight">magnus carlsen's strategies</span>. 
-            the goal is to eventually become a grandmaster.
-        </p>
-        <p>
-            feel free to <a href="https://link.chess.com/play/in9mTR" class="inline-link" target="_blank">hmu for a match lol</a>.
-        </p>
-    </div>
-
-    <!-- PAGE: RULES -->
-    <div id="rules" class="page">
-        <h2>life rules</h2>
-        <p>
-            i try to live by the <a href="https://open.spotify.com/show/4KNicF2b64rXaDjqs1QaiK" class="inline-link" target="_blank">wabi-sabi</a> 
-            rules of living—finding peace in imperfection and the natural cycle of things.
-        </p>
-        <p>
-            i'm also focused on systems for <a href="https://paulgraham.com/wealth.html" class="inline-link" target="_blank">wealth creation</a>, 
-            applying strategic planning to build things that last.
-        </p>
-    </div>
-
-    <!-- SOCIALS -->
-    <div class="social-row">
-        <a href="https://x.com/AbdullahMa79411" class="social-icon" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/abdullah-malik-4315b5354" class="social-icon" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-        </a>
-        <a href="https://github.com/AbdullahMalik7" class="social-icon" target="_blank">
-            <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        </a>
-    </div>
-
     <script>
-        // SPA Page Logic
         function showPage(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(p => p.classList.remove('active'));
@@ -272,46 +264,33 @@
             window.scrollTo(0, 0);
         }
 
-        // Automatic Timezone & Clock Logic
         function updateStatus() {
             const now = new Date();
-            
-            // 1. Update Clock
             const timeStr = now.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
             document.getElementById('clock').innerText = timeStr;
-
-            // 2. Detect & Update Timezone Offset Label
             const offset = -now.getTimezoneOffset() / 60;
             const sign = offset >= 0 ? "+" : "-";
             document.getElementById('timezone-label').innerText = `Local Time (GMT${sign}${Math.abs(offset)})`;
         }
 
-        // Calendar logic built on local time
         function buildCalendar() {
             const now = new Date();
             const year = now.getFullYear();
             const month = now.getMonth();
             const today = now.getDate();
-
             const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
             document.getElementById('month-year').innerText = `${monthNames[month]} ${year}`;
-
             const calendarDays = document.getElementById('calendar-days');
             calendarDays.innerHTML = '';
-
-            // Labels
             ['s', 'm', 't', 'w', 't', 'f', 's'].forEach(d => {
                 const el = document.createElement('div');
                 el.className = 'day-label';
                 el.innerText = d;
                 calendarDays.appendChild(el);
             });
-
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-
             for (let i = 0; i < firstDay; i++) calendarDays.appendChild(document.createElement('div'));
-
             for (let i = 1; i <= daysInMonth; i++) {
                 const el = document.createElement('div');
                 el.innerText = i;
@@ -320,13 +299,9 @@
             }
         }
 
-        // Initial Runs
         setInterval(updateStatus, 1000);
         updateStatus();
         buildCalendar();
-        
-        // Re-build calendar every hour in case date changes while tab is open
-        setInterval(buildCalendar, 3600000); 
     </script>
 </body>
 </html>
